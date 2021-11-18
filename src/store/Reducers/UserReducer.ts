@@ -1,25 +1,23 @@
 import {LOGIN_USER, LOGOUT_USER} from '../Actions/ActionTypes';
 
 const initialState = {
-  userType: '', // guest or non-guest
+  userType: '',
   loggedIn: false,
-  userData: {}, // to be used later for google & fb signin
+  userData: {},
 };
 
 export const UserDetailsReducer = (state = initialState, action) => {
+  console.log(action, 'action ');
   switch (action.type) {
     case LOGIN_USER:
       return {
         ...state,
         userType: action.payload.userType,
         loggedIn: true,
+        userData: action.payload.userData || {},
       };
     case LOGOUT_USER:
-      return {
-        ...state,
-        userType: '',
-        loggedIn: false,
-      };
+      return initialState;
     default:
       return state;
   }

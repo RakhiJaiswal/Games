@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, Text, SafeAreaView, Modal, TouchableOpacity} from 'react-native';
 import ProfileScreen from './ProfileScreen';
-
+import {useSelector} from 'react-redux';
 const MenuScreen = ({navigation}) => {
+  console.log(useSelector(state => state.UserDetailsReducer));
   return (
     <SafeAreaView>
       <Text>Welcome</Text>
