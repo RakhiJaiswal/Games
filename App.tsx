@@ -13,11 +13,12 @@ import {useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
 const Stack = createNativeStackNavigator();
+
 export const navigationRef = createNavigationContainerRef();
 
 const AppNavigator = () => {
   const userDetails = useSelector(state => state.UserDetailsReducer.loggedIn);
-  console.log('user', userDetails);
+
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
@@ -35,6 +36,7 @@ const AppNavigator = () => {
     </NavigationContainer>
   );
 };
+
 const App = () => {
   return (
     <Provider store={store}>

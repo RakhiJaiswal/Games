@@ -14,6 +14,7 @@ const rootReducer = combineReducers({UserDetailsReducer});
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(persistedReducer);
+
 export const persistor = persistStore(store, null, () => {
   console.log({name: 'Persisted state', value: store.getState()});
 });

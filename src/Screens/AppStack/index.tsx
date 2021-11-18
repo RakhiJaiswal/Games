@@ -9,6 +9,7 @@ const AppStack = () => {
 
   return (
     <Stack.Navigator
+      initialRouteName={MenuScreen}
       screenOptions={{
         gestureEnabled: true,
         animation: 'slide_from_right',

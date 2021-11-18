@@ -6,7 +6,6 @@ const MenuScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       <Text>Welcome</Text>
-
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('TicTacToe');
@@ -16,6 +15,7 @@ const MenuScreen = ({navigation}) => {
       <TouchableOpacity>
         <Text> Bingo </Text>
       </TouchableOpacity>
+      <ProfileScreen />
     </SafeAreaView>
   );
 };
