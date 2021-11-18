@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Text, SafeAreaView, TouchableOpacity} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {LoginUserAction} from '../../../store/Actions/UserAction';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -11,27 +11,15 @@ GoogleSignin.configure({
 });
 
 const LoginScreen = () => {
-  console.log(useSelector(state => state.UserDetailsReducer));
-
   const dispatch = useDispatch();
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
 
-  // Handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
-
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber;
-  }, []);
   async function onGoogleButtonPress() {
     const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
     return auth().signInWithCredential(googleCredential);
   }
+
   return (
     <SafeAreaView>
       <TouchableOpacity
