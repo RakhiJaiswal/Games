@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/core';
+
 import {Image} from 'react-native-animatable';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 
 const Menu = ({onPress = () => {}}) => {
-  const navigation = useNavigation();
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -30,7 +29,6 @@ const Menu = ({onPress = () => {}}) => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              navigation.goBack();
               onPress();
             }}>
             <Text> Leave Game </Text>

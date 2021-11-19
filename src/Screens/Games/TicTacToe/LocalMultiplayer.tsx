@@ -36,7 +36,7 @@ const winPosition = [
 ];
 let winArray = [];
 
-const LocalMultiplayer = () => {
+const LocalMultiplayer = ({changeScreen}) => {
   const [count, setCount] = useState(0);
   const [turn, setNextTurn] = useState('X');
   const [cell1, setCell1] = useState('');
@@ -129,11 +129,14 @@ const LocalMultiplayer = () => {
     );
   };
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <StatusBar barStyle={'light-content'} />
-
+    <>
       <View style={styles.gameName}>
-        <Menu onPress={() => reset()} />
+        <Menu
+          onPress={() => {
+            reset();
+            changeScreen();
+          }}
+        />
         <Animatable.Text
           animation="bounceIn"
           iterationCount={'infinite'}
@@ -267,7 +270,7 @@ const LocalMultiplayer = () => {
           </Modal>
         </View>
       </View>
-    </SafeAreaView>
+    </>
   );
 };
 

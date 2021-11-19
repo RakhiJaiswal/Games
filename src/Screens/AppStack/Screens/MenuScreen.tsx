@@ -19,6 +19,12 @@ const MenuScreen = ({navigation}) => {
         }}>
         <Text> Bingo </Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('SnakesLadder');
+        }}>
+        <Text> snakes and Ladder </Text>
+      </TouchableOpacity>
       <ProfileScreen />
     </SafeAreaView>
   );

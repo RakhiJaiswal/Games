@@ -12,8 +12,7 @@ import {Colors} from '../TicTacToe/consts';
 import LocalMultiplayer from './LocalMultiplayer';
 
 import Menu from './Menu';
-
-const TicTacToe = ({navigation}) => {
+const SnakesLadder = ({navigation}) => {
   const [screen, setScreen] = useState('menu');
   const changeScreen = () => {
     screen === 'menu' ? setScreen('game') : setScreen('menu');
@@ -35,4 +34,4 @@ const TicTacToe = ({navigation}) => {
   );
 };
 
-export default TicTacToe;
+export default SnakesLadder;
