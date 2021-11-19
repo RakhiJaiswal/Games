@@ -16,7 +16,7 @@ import Modal from 'react-native-modal';
 import LottieView from 'lottie-react-native';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import BackButton from '../commonComponents/BackButton';
-import {Cross, Circle, Tic, Toe, Tac} from './assets/index';
+import {Cross, Circle, Tic, Toe, Tac, Reload} from './assets/index';
 import {Colors} from './consts';
 import Menu from '../commonComponents/Menu';
 
@@ -42,8 +42,8 @@ const LocalMultiplayer = () => {
   const [cell1, setCell1] = useState('');
   const [cell2, setCell2] = useState('');
   const [cell3, setCell3] = useState('');
-  const [isOpen, isOpenSetState] = useState(true);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [winner, setWinner] = useState();
   let hasWinner;
 
   useEffect(() => {
@@ -62,15 +62,14 @@ const LocalMultiplayer = () => {
       }
       if (hasWinner === true) {
         winArray = winPosition[i];
-        console.log(winArray, 'winArray');
-        let who = turn === 'X' ? '0' : 'X';
-        Alert.alert('Winner is', who);
+        setWinner(turn === 'X' ? 'O' : 'X');
         disable.fill(true, 0, disable.length);
+        setIsModalOpen(true);
         break;
       }
     }
     if (count >= 9) {
-      Alert.alert('Tie');
+      setWinner('Tie');
     }
   }, [turn]);
 
@@ -89,16 +88,43 @@ const LocalMultiplayer = () => {
   };
 
   const DefaultModalContent = () => {
+    console.log(winner, 'dfd');
     return (
       <View style={styles.content}>
-        <Text style={styles.contentTitle}>Player 1 Win</Text>
-
+        <Text style={styles.contentTitle}>
+          {' '}
+          {winner === 'Tie'
+            ? 'Tie Game'
+            : winner === 'X'
+            ? 'Player 1 Wins'
+            : 'Player 2 Wins'}
+        </Text>
         <LottieView
           source={require('../../../../piggyDancing.json')}
           autoPlay
           loop
         />
-        {/* <Button testID={'close-button'} onPress={{}} title="Close" /> */}
+        <LottieView source={require('../../../../winner.json')} autoPlay loop />
+        <TouchableOpacity
+          onPress={() => {
+            setIsModalOpen(false);
+            reset();
+          }}
+          style={{
+            position: 'absolute',
+            bottom: ResponsiveSize(-25),
+            backgroundColor: 'orange',
+            width: ResponsiveSize(70),
+            height: ResponsiveSize(70),
+            borderRadius: ResponsiveSize(50),
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Image
+            source={Reload}
+            style={{width: ResponsiveSize(50), height: ResponsiveSize(50)}}
+          />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -228,7 +254,7 @@ const LocalMultiplayer = () => {
         </Animatable.View>
         <View>
           <Modal
-            isVisible={isOpen}
+            isVisible={isModalOpen}
             backdropColor="#B4B3DB"
             backdropOpacity={0.8}
             animationIn="zoomInDown"
@@ -238,11 +264,6 @@ const LocalMultiplayer = () => {
             backdropTransitionInTiming={600}
             backdropTransitionOutTiming={600}>
             <DefaultModalContent />
-            <LottieView
-              source={require('../../../../winner.json')}
-              autoPlay
-              loop
-            />
           </Modal>
         </View>
       </View>
@@ -296,16 +317,16 @@ const styles = StyleSheet.create({
   },
   img: {height: ResponsiveSize(90), width: ResponsiveSize(90)},
   content: {
-    backgroundColor: 'white',
-    height: ResponsiveSize(400),
+    backgroundColor: Colors.purple,
+    height: '70%',
     alignItems: 'center',
-    borderRadius: 50,
-    borderColor: 'Colors.purple',
+    borderRadius: ResponsiveSize(50),
   },
   contentTitle: {
-    fontSize: 20,
+    fontSize: ResponsiveSize(50),
+    color: Colors.pink,
     fontWeight: 'bold',
-    marginTop: 20,
+    marginTop: ResponsiveSize(30),
   },
 });
 export default LocalMultiplayer;
