@@ -9,13 +9,17 @@ import {
   Image,
   SafeAreaView,
   StatusBar,
+  Button,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import Modal from 'react-native-modal';
+import LottieView from 'lottie-react-native';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import BackButton from '../commonComponents/BackButton';
 import {Cross, Circle, Tic, Toe, Tac} from './assets/index';
 import {Colors} from './consts';
 import Menu from '../commonComponents/Menu';
+
 let Xarray = [];
 let Oarray = [];
 let mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -38,6 +42,7 @@ const LocalMultiplayer = () => {
   const [cell1, setCell1] = useState('');
   const [cell2, setCell2] = useState('');
   const [cell3, setCell3] = useState('');
+  const [isOpen, isOpenSetState] = useState(true);
 
   let hasWinner;
 
@@ -68,6 +73,7 @@ const LocalMultiplayer = () => {
       Alert.alert('Tie');
     }
   }, [turn]);
+
   useEffect(() => {
     setCell1(winArray[0]);
     setCell2(winArray[1]);
@@ -81,6 +87,21 @@ const LocalMultiplayer = () => {
     disable = [false, false, false, false, false, false, false, false, false];
     winArray = [];
   };
+
+  const DefaultModalContent = () => {
+    return (
+      <View style={styles.content}>
+        <Text style={styles.contentTitle}>Player 1 Win</Text>
+
+        <LottieView
+          source={require('../../../../piggyDancing.json')}
+          autoPlay
+          loop
+        />
+        {/* <Button testID={'close-button'} onPress={{}} title="Close" /> */}
+      </View>
+    );
+  };
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar barStyle={'light-content'} />
@@ -89,7 +110,7 @@ const LocalMultiplayer = () => {
         <Menu onPress={() => reset()} />
         <Animatable.Text
           animation="bounceIn"
-          // iterationCount={'infinite'}
+          iterationCount={'infinite'}
           direction="alternate">
           <Image
             resizeMode={'contain'}
@@ -100,7 +121,7 @@ const LocalMultiplayer = () => {
 
         <Animatable.Text
           animation="bounceIn"
-          //  iterationCount={'infinite'}
+          iterationCount={'infinite'}
           direction="alternate">
           <Image
             resizeMode={'contain'}
@@ -111,7 +132,7 @@ const LocalMultiplayer = () => {
 
         <Animatable.Text
           animation="bounceIn"
-          // iterationCount={'infinite'}
+          iterationCount={'infinite'}
           direction="alternate">
           <Image
             resizeMode={'contain'}
@@ -205,12 +226,29 @@ const LocalMultiplayer = () => {
             }}
           />
         </Animatable.View>
+        <View>
+          <Modal
+            isVisible={isOpen}
+            backdropColor="#B4B3DB"
+            backdropOpacity={0.8}
+            animationIn="zoomInDown"
+            animationOut="zoomOutUp"
+            animationInTiming={600}
+            animationOutTiming={600}
+            backdropTransitionInTiming={600}
+            backdropTransitionOutTiming={600}>
+            <DefaultModalContent />
+            <LottieView
+              source={require('../../../../winner.json')}
+              autoPlay
+              loop
+            />
+          </Modal>
+        </View>
       </View>
     </SafeAreaView>
   );
 };
-
-export default LocalMultiplayer;
 
 const styles = StyleSheet.create({
   mainContainer: {flex: 1, backgroundColor: Colors.purple},
@@ -257,4 +295,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   img: {height: ResponsiveSize(90), width: ResponsiveSize(90)},
+  content: {
+    backgroundColor: 'white',
+    height: ResponsiveSize(400),
+    alignItems: 'center',
+    borderRadius: 50,
+    borderColor: 'Colors.purple',
+  },
+  contentTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 20,
+  },
 });
+export default LocalMultiplayer;
