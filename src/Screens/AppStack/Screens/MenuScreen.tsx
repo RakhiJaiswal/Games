@@ -13,7 +13,10 @@ const MenuScreen = ({navigation}) => {
         }}>
         <Text> TIC TAC TOE </Text>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Bingo');
+        }}>
         <Text> Bingo </Text>
       </TouchableOpacity>
       <ProfileScreen />
