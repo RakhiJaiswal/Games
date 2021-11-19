@@ -12,13 +12,14 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
+import BackButton from '../commonComponents/BackButton';
 import {Cross, Circle, Tic, Toe, Tac} from './assets/index';
 import {Colors} from './consts';
-
+import Menu from '../commonComponents/Menu';
 let Xarray = [];
 let Oarray = [];
-const mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-const disable = [false, false, false, false, false, false, false, false, false];
+let mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let disable = [false, false, false, false, false, false, false, false, false];
 const winPosition = [
   [0, 1, 2],
   [3, 4, 5],
@@ -72,10 +73,20 @@ const LocalMultiplayer = () => {
     setCell2(winArray[1]);
     setCell3(winArray[2]);
   }, [winArray]);
+
+  const reset = () => {
+    Xarray = [];
+    Oarray = [];
+    mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    disable = [false, false, false, false, false, false, false, false, false];
+    winArray = [];
+  };
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar barStyle={'light-content'} />
+
       <View style={styles.gameName}>
+        <Menu onPress={() => reset()} />
         <Animatable.Text
           animation="bounceIn"
           // iterationCount={'infinite'}

@@ -11,6 +11,7 @@ import {
 import {Colors} from './consts';
 import {Tic, Toe, Tac} from './assets/index';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
+import BackButton from '../commonComponents/BackButton';
 
 const TicTacToe = ({navigation}) => {
   const imgArr = [Tic, Tac, Toe];
@@ -18,9 +19,12 @@ const TicTacToe = ({navigation}) => {
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar barStyle={'light-content'} />
       <View style={styles.container}>
+        <BackButton />
+        <View style={{height: ResponsiveSize(40)}} />
         {imgArr.map(elem => (
           <Image resizeMode={'stretch'} source={elem} style={styles.img} />
         ))}
+
         <View style={{flex: 1}} />
         <TouchableOpacity
           style={styles.buttonView}
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: ResponsiveSize(30),
     borderRadius: ResponsiveSize(20),
   },
-  img: {width: '50%', height: '18%'},
+  img: {width: '70%', height: '18%'},
   mainContainer: {backgroundColor: Colors.purple, flex: 1},
   container: {flex: 1, backgroundColor: Colors.purple, alignItems: 'center'},
 });
