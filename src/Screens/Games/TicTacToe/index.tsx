@@ -8,6 +8,7 @@ import {
   Alert,
   Image,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
@@ -73,6 +74,7 @@ const TicTacToe = () => {
   }, [winArray]);
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <StatusBar barStyle={'light-content'} />
       <View style={styles.gameName}>
         <Animatable.Text
           animation="lightSpeedOut"
