@@ -1,20 +1,12 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  StatusBar,
-  Image,
-  StyleSheet,
-} from 'react-native';
-import {Colors} from '../TicTacToe/consts';
+import {SafeAreaView, StatusBar} from 'react-native';
+import {Colors} from './assets/consts';
 import LocalMultiplayer from './LocalMultiplayer';
-
 import Menu from './Menu';
 
-const TicTacToe = ({navigation}) => {
+const TicTacToe = () => {
   const [screen, setScreen] = useState('menu');
+  
   const changeScreen = () => {
     screen === 'menu' ? setScreen('game') : setScreen('menu');
   };

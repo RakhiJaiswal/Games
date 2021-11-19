@@ -11,7 +11,7 @@ const Menu = ({onPress = () => {}}) => {
       <View style={{position: 'absolute', right: 10}}>
         <TouchableOpacity onPress={() => setOpen(!open)}>
           <Image
-            source={require('../../../assets/menu.png')}
+            source={require('../../../assets/images/menu.png')}
             resizeMode={'stretch'}
             style={{height: ResponsiveSize(20), width: ResponsiveSize(20)}}
           />

@@ -2,19 +2,19 @@ import React from 'react';
 import {
   View,
   Text,
-  SafeAreaView,
   TouchableOpacity,
-  StatusBar,
   Image,
   StyleSheet,
 } from 'react-native';
-import {Colors} from './consts';
-import {Tic, Toe, Tac} from './assets/index';
+import {Colors} from './assets/consts';
+import {Tic, Toe, Tac} from './assets/images/index';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import BackButton from '../commonComponents/BackButton';
 
 const Menu = ({changeScreen}) => {
+
   const imgArr = [Tic, Tac, Toe];
+  
   return (
     <View style={styles.container}>
       <BackButton />
@@ -22,7 +22,6 @@ const Menu = ({changeScreen}) => {
       {imgArr.map(elem => (
         <Image resizeMode={'stretch'} source={elem} style={styles.img} />
       ))}
-
       <View style={{flex: 1}} />
       <TouchableOpacity style={styles.buttonView} onPress={changeScreen}>
         <Text style={styles.buttonText}> Local Mutliplayer </Text>
@@ -47,6 +46,5 @@ const styles = StyleSheet.create({
     borderRadius: ResponsiveSize(20),
   },
   img: {width: '70%', height: '18%'},
-  mainContainer: {backgroundColor: Colors.purple, flex: 1},
   container: {flex: 1, backgroundColor: Colors.purple, alignItems: 'center'},
 });

@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
 import {
-  View,
-  Text,
+  
   SafeAreaView,
-  TouchableOpacity,
+  
   StatusBar,
   Image,
   StyleSheet,
 } from 'react-native';
-import {Colors} from '../TicTacToe/consts';
+import {Colors} from '../TicTacToe/assets/consts';
 import LocalMultiplayer from './LocalMultiplayer';
-
 import Menu from './Menu';
+
 const SnakesLadder = ({navigation}) => {
   const [screen, setScreen] = useState('menu');
   const changeScreen = () => {
@@ -27,7 +26,7 @@ const SnakesLadder = ({navigation}) => {
     }
   };
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: Colors.purple}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: "darkGreen"}}>
       <StatusBar barStyle={'light-content'} />
       {display()}
     </SafeAreaView>

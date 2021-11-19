@@ -5,19 +5,14 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Alert,
   Image,
-  SafeAreaView,
-  StatusBar,
-  Button,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Modal from 'react-native-modal';
 import LottieView from 'lottie-react-native';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
-import BackButton from '../commonComponents/BackButton';
-import {Cross, Circle, Tic, Toe, Tac, Reload} from './assets/index';
-import {Colors} from './consts';
+import {Cross, Circle, Tic, Toe, Tac, Reload} from './assets/images/index';
+import {Colors} from './assets/consts';
 import Menu from '../commonComponents/Menu';
 
 let Xarray = [];
@@ -275,7 +270,6 @@ const LocalMultiplayer = ({changeScreen}) => {
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {flex: 1, backgroundColor: Colors.purple},
   gameName: {
     alignItems: 'center',
     flexDirection: 'row',

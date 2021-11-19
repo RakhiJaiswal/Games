@@ -7,15 +7,18 @@ import {
   View,
   TouchableOpacity,
   Alert,
-  Dimensions,
+  
 } from 'react-native';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
+
 const LocalMultiplayer = ({changeScreen}) => {
+
   let data = [];
   const [number, setNumber] = useState(0);
   const [currentPosition1, setCurrentPosition1] = useState(1);
   const [currentPosition2, setCurrentPosition2] = useState(1);
   const [chance1, setChance1] = useState(false);
+  
   useEffect(() => {
     if (chance1) {
       if (currentPosition1 + number > 100) {

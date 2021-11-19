@@ -7,9 +7,10 @@ import {
   StatusBar,
   StyleSheet,
 } from 'react-native';
-import {Colors} from '../TicTacToe/consts';
+import {Colors} from '../TicTacToe/assets/consts';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import BackButton from '../commonComponents/BackButton';
+
 const Menu = ({changeScreen}) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -17,7 +18,7 @@ const Menu = ({changeScreen}) => {
       <View style={styles.container}>
         <BackButton />
         <View style={{height: ResponsiveSize(40)}} />
-        <Text> snakes and LAdder </Text>
+        <Text style={{color:"white"}}> snakes and LAdder </Text>
         <View style={{flex: 1}} />
         <TouchableOpacity style={styles.buttonView} onPress={changeScreen}>
           <Text style={styles.buttonText}> Local Mutliplayer </Text>
