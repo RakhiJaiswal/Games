@@ -3,6 +3,7 @@ import MenuScreen from './Screens/MenuScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProfileScreen from './Screens/ProfileScreen';
 import TicTacToe from '../Games/TicTacToe';
+import LocalMultiplayer from '../Games/TicTacToe/LocalMultiplayer';
 
 const AppStack = () => {
   const Stack = createNativeStackNavigator();
@@ -32,6 +33,13 @@ const AppStack = () => {
       <Stack.Screen
         name="TicTacToe"
         component={TicTacToe}
+        options={{
+          orientation: 'portrait',
+        }}
+      />
+      <Stack.Screen
+        name="LocalMultiplayer"
+        component={LocalMultiplayer}
         options={{
           orientation: 'portrait',
         }}
