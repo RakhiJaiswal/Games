@@ -5,7 +5,7 @@ import ProfileScreen from './Screens/ProfileScreen';
 import TicTacToe from '../Games/TicTacToe';
 import Bingo from '../Games/Bingo';
 import SnakesLadder from '../Games/SnakesLadder';
-import SKLocalMultiplayer from '../Games/SnakesLadder/LocalMultiplayer';
+import Sumo from '../Games/Sumo';
 
 const AppStack = () => {
   const Stack = createNativeStackNavigator();
@@ -50,6 +50,13 @@ const AppStack = () => {
       <Stack.Screen
         name="SnakesLadder"
         component={SnakesLadder}
+        options={{
+          orientation: 'portrait',
+        }}
+      />
+       <Stack.Screen
+        name="Sumo"
+        component={Sumo}
         options={{
           orientation: 'portrait',
         }}

@@ -31,6 +31,11 @@ const mockData = [
     image: SnakeLadder,
     navigate: 'SnakesLadder',
   },
+  {
+    name: 'Sumo',
+    image: SnakeLadder,
+    navigate: 'Sumo',
+  },
 ];
 const MenuScreen = ({navigation}) => {
   console.log(useSelector(state => state.UserDetailsReducer));
