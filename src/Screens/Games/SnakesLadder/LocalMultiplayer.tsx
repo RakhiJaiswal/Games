@@ -262,7 +262,6 @@ export default LocalMultiplayer;
 const styles = StyleSheet.create({
   boardCell: {
     alignItems: 'center',
-    borderWidth: 1,
     width: '10%',
     height: ResponsiveSize(65),
   },
