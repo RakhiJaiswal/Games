@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  
-  SafeAreaView,
-  
-  StatusBar,
-  Image,
-  StyleSheet,
-} from 'react-native';
+import {SafeAreaView, StatusBar, Image, StyleSheet} from 'react-native';
 import {Colors} from '../TicTacToe/assets/consts';
 import LocalMultiplayer from './LocalMultiplayer';
 import Menu from './Menu';
@@ -26,7 +19,7 @@ const SnakesLadder = ({navigation}) => {
     }
   };
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: "darkGreen"}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'darkGreen'}}>
       <StatusBar barStyle={'light-content'} />
       {display()}
     </SafeAreaView>

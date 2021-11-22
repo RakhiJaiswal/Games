@@ -1,0 +1,12 @@
+export {default as longLadder} from './longLadder.png';
+export {default as shortLadder} from './shortLadder.png';
+export {default as pinkSnake} from './pinkSnake.png';
+export {default as greenSnake} from './greenSnake.png';
+export {default as largeSnake} from './largeSnake.png';
+export {default as blueSnake} from './blueSnake.png';
+export {default as dice6} from './dice6.png';
+export {default as dice1} from './dice1.png';
+export {default as dice2} from './dice2.png';
+export {default as dice3} from './dice3.png';
+export {default as dice4} from './dice4.png';
+export {default as dice5} from './dice5.png';
