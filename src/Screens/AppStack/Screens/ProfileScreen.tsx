@@ -8,9 +8,9 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView>
-      <Text>ProfileScreen </Text>
+      {/* <Text>ProfileScreen </Text>
       <Text> Name </Text>
-      <Text> Profile Image</Text>
+      <Text> Profile Image</Text> */}
       <TouchableOpacity
         onPress={() => {
           dispatch(LogoutUserAction());
