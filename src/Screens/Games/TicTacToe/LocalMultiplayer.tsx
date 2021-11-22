@@ -87,7 +87,6 @@ const LocalMultiplayer = ({changeScreen}) => {
     return (
       <View style={styles.content}>
         <Text style={styles.contentTitle}>
-          {' '}
           {winner === 'Tie'
             ? 'Tie Game'
             : winner === 'X'
