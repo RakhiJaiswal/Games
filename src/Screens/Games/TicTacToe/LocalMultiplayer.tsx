@@ -38,15 +38,16 @@ const LocalMultiplayer = ({changeScreen}) => {
   const [cell2, setCell2] = useState('');
   const [cell3, setCell3] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [winner, setWinner] = useState();
+  const [winner, setWinner] = useState(false);
   let hasWinner;
 
   const checkWinner = () => {};
-  useEffect(() => {
+  
+  useEffect(() => {  
     if (count === 0) {
-      setWinner('');
+      setWinner(false);
     }
-    setCount(count + 1);
+ 
     for (let i = 0; i < winPosition.length; i++) {
       if (turn === 'X') {
         hasWinner =
@@ -67,10 +68,15 @@ const LocalMultiplayer = ({changeScreen}) => {
         break;
       }
     }
-    if (count > 9) {
-      setWinner('Tie');
-    }
   }, [turn]);
+  
+  useEffect(() => {
+    if (count === 9 && hasWinner !== true) {
+      setWinner('Tie');
+      disable.fill(true, 0, disable.length);
+      setIsModalOpen(true);
+    }
+  }, [count])
 
   useEffect(() => {
     setCell1(winArray[0]);
@@ -93,7 +99,7 @@ const LocalMultiplayer = ({changeScreen}) => {
   };
 
   const DefaultModalContent = () => {
-    console.log(winner, 'dfd');
+  
     return (
       <View style={styles.content}>
         <Text style={styles.contentTitle}>
@@ -227,7 +233,9 @@ const LocalMultiplayer = ({changeScreen}) => {
                     mockData[index] = turn;
                     disable[index] = true;
                     turn === 'X' ? Xarray.push(index) : Oarray.push(index);
+                    setCount(count+1)
                     setNextTurn(turn === 'X' ? 'O' : 'X');
+                    
                   }}
                   activeOpacity={1}
                   style={{
