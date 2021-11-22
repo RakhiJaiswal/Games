@@ -131,7 +131,7 @@ const LocalMultiplayer = ({changeScreen}) => {
             changeScreen();
           }}
         />
-        <Animatable.Text
+        <Animatable.View
           animation="bounceIn"
           iterationCount={'infinite'}
           direction="alternate">
@@ -140,9 +140,9 @@ const LocalMultiplayer = ({changeScreen}) => {
             source={Tic}
             style={{width: ResponsiveSize(100), height: ResponsiveSize(50)}}
           />
-        </Animatable.Text>
+        </Animatable.View>
 
-        <Animatable.Text
+        <Animatable.View
           animation="bounceIn"
           iterationCount={'infinite'}
           direction="alternate">
@@ -151,9 +151,9 @@ const LocalMultiplayer = ({changeScreen}) => {
             source={Tac}
             style={{width: ResponsiveSize(100), height: ResponsiveSize(50)}}
           />
-        </Animatable.Text>
+        </Animatable.View>
 
-        <Animatable.Text
+        <Animatable.View
           animation="bounceIn"
           iterationCount={'infinite'}
           direction="alternate">
@@ -162,7 +162,7 @@ const LocalMultiplayer = ({changeScreen}) => {
             source={Toe}
             style={{width: ResponsiveSize(100), height: ResponsiveSize(50)}}
           />
-        </Animatable.Text>
+        </Animatable.View>
       </View>
 
       <View style={styles.playersView}>
