@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {Image} from 'react-native-animatable';
+import {View, Text, TouchableOpacity , Image} from 'react-native';
+import { backArrow } from '../../../assets/images';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 
 const BackButton = () => {
@@ -11,7 +11,7 @@ const BackButton = () => {
       <TouchableOpacity onPress={() => navigation.navigate('MenuScreen')}>
         <Image
           resizeMode={'stretch'}
-          source={require('../../../assets/images/backArrow.png')}
+          source={backArrow}
           style={{height: ResponsiveSize(20), width: ResponsiveSize(30)}}
         />
       </TouchableOpacity>

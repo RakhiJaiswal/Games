@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import ProfileScreen from './ProfileScreen';
 import * as Animatable from 'react-native-animatable';
-import {TicTacToeGame, BingoGame, SnakeLadder} from './../../../assets/index';
+import {TicTacToeGame, BingoGame, SnakeLadder } from '../../../assets/images';
 import {useSelector} from 'react-redux';
 const mockData = [
   {

@@ -14,6 +14,7 @@ import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import {Colors} from '../../Games/TicTacToe/assets/consts';
+import { google, user } from '../../../assets/images';
 
 GoogleSignin.configure({
   webClientId:
@@ -47,13 +48,13 @@ const LoginScreen = () => {
       <View style={{flex: 0.2}} />
       <ButtonView
         buttonText={'  Guest'}
-        icon={require('../../../assets/images/user.png')}
+        icon={user}
         buttonPress={() => dispatch(LoginUserAction({userType: 'guest'}))}
       />
       <View style={{flex: 0.1}} />
       <ButtonView
         buttonText={'  Google'}
-        icon={require('../../../assets/images/google.png')}
+        icon={google}
         buttonPress={() => {
           onGoogleButtonPress().then(res => {
             dispatch(

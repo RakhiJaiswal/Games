@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-
-import {Image} from 'react-native-animatable';
+import {View, Text, TouchableOpacity , Image} from 'react-native';
+import { menu } from '../../../assets/images';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 
 const Menu = ({onPress = () => {}}) => {
@@ -11,7 +10,7 @@ const Menu = ({onPress = () => {}}) => {
       <View style={{position: 'absolute', right: 10}}>
         <TouchableOpacity onPress={() => setOpen(!open)}>
           <Image
-            source={require('../../../assets/images/menu.png')}
+            source={menu}
             resizeMode={'stretch'}
             style={{height: ResponsiveSize(20), width: ResponsiveSize(20)}}
           />
