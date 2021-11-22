@@ -11,7 +11,7 @@ const BackButton = () => {
       <TouchableOpacity onPress={() => navigation.navigate('MenuScreen')}>
         <Image
           resizeMode={'stretch'}
-          source={require('../../../assets/backArrow.png')}
+          source={require('../../../assets/images/backArrow.png')}
           style={{height: ResponsiveSize(20), width: ResponsiveSize(30)}}
         />
       </TouchableOpacity>

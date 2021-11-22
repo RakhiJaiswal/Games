@@ -34,7 +34,7 @@ const MenuScreen = ({navigation}) => {
           data={mockData}
           renderItem={({item, index}) => {
             return (
-              <View>
+              <View style={{}}>
                 <ImageBackground
                   source={item.image}
                   resizeMode="contain"

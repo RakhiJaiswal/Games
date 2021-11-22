@@ -5,19 +5,14 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Alert,
   Image,
-  SafeAreaView,
-  StatusBar,
-  Button,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Modal from 'react-native-modal';
 import LottieView from 'lottie-react-native';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
-import BackButton from '../commonComponents/BackButton';
-import {Cross, Circle, Tic, Toe, Tac, Reload} from './assets/index';
-import {Colors} from './consts';
+import {Cross, Circle, Tic, Toe, Tac, Reload} from './assets/images/index';
+import {Colors} from './assets/consts';
 import Menu from '../commonComponents/Menu';
 
 let Xarray = [];
@@ -36,7 +31,7 @@ const winPosition = [
 ];
 let winArray = [];
 
-const LocalMultiplayer = () => {
+const LocalMultiplayer = ({changeScreen}) => {
   const [count, setCount] = useState(0);
   const [turn, setNextTurn] = useState('X');
   const [cell1, setCell1] = useState('');
@@ -129,11 +124,14 @@ const LocalMultiplayer = () => {
     );
   };
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <StatusBar barStyle={'light-content'} />
-
+    <>
       <View style={styles.gameName}>
-        <Menu onPress={() => reset()} />
+        <Menu
+          onPress={() => {
+            reset();
+            changeScreen();
+          }}
+        />
         <Animatable.Text
           animation="bounceIn"
           iterationCount={'infinite'}
@@ -267,12 +265,11 @@ const LocalMultiplayer = () => {
           </Modal>
         </View>
       </View>
-    </SafeAreaView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {flex: 1, backgroundColor: Colors.purple},
   gameName: {
     alignItems: 'center',
     flexDirection: 'row',
