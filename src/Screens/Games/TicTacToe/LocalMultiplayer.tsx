@@ -41,7 +41,11 @@ const LocalMultiplayer = ({changeScreen}) => {
   const [winner, setWinner] = useState();
   let hasWinner;
 
+  const checkWinner = () => {};
   useEffect(() => {
+    if (count === 0) {
+      setWinner('');
+    }
     setCount(count + 1);
     for (let i = 0; i < winPosition.length; i++) {
       if (turn === 'X') {
@@ -63,7 +67,7 @@ const LocalMultiplayer = ({changeScreen}) => {
         break;
       }
     }
-    if (count >= 9) {
+    if (count > 9) {
       setWinner('Tie');
     }
   }, [turn]);
@@ -80,6 +84,12 @@ const LocalMultiplayer = ({changeScreen}) => {
     mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     disable = [false, false, false, false, false, false, false, false, false];
     winArray = [];
+    setCount(0);
+    setNextTurn('X');
+    setCell1('');
+    setCell2('');
+    setCell3('');
+    hasWinner = '';
   };
 
   const DefaultModalContent = () => {
@@ -131,7 +141,7 @@ const LocalMultiplayer = ({changeScreen}) => {
             changeScreen();
           }}
         />
-        <Animatable.View
+        <Animatable.Text
           animation="bounceIn"
           iterationCount={'infinite'}
           direction="alternate">
@@ -140,9 +150,9 @@ const LocalMultiplayer = ({changeScreen}) => {
             source={Tic}
             style={{width: ResponsiveSize(100), height: ResponsiveSize(50)}}
           />
-        </Animatable.View>
+        </Animatable.Text>
 
-        <Animatable.View
+        <Animatable.Text
           animation="bounceIn"
           iterationCount={'infinite'}
           direction="alternate">
@@ -151,9 +161,9 @@ const LocalMultiplayer = ({changeScreen}) => {
             source={Tac}
             style={{width: ResponsiveSize(100), height: ResponsiveSize(50)}}
           />
-        </Animatable.View>
+        </Animatable.Text>
 
-        <Animatable.View
+        <Animatable.Text
           animation="bounceIn"
           iterationCount={'infinite'}
           direction="alternate">
@@ -162,7 +172,7 @@ const LocalMultiplayer = ({changeScreen}) => {
             source={Toe}
             style={{width: ResponsiveSize(100), height: ResponsiveSize(50)}}
           />
-        </Animatable.View>
+        </Animatable.Text>
       </View>
 
       <View style={styles.playersView}>
