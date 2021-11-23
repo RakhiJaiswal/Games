@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuScreen from './Screens/MenuScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ProfileScreen from './Screens/ProfileScreen';
+
 import TicTacToe from '../Games/TicTacToe';
 import Bingo from '../Games/Bingo';
 import SnakesLadder from '../Games/SnakesLadder';
@@ -25,13 +25,7 @@ const AppStack = () => {
           orientation: 'portrait',
         }}
       />
-      <Stack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{
-          orientation: 'portrait',
-        }}
-      />
+
       <Stack.Screen
         name="TicTacToe"
         component={TicTacToe}
@@ -54,7 +48,7 @@ const AppStack = () => {
           orientation: 'portrait',
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Sumo"
         component={Sumo}
         options={{

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   SafeAreaView,
-  Modal,
   TouchableOpacity,
   ImageBackground,
   FlatList,
@@ -13,8 +12,9 @@ import {
 } from 'react-native';
 import ProfileScreen from './ProfileScreen';
 import * as Animatable from 'react-native-animatable';
-import {TicTacToeGame, BingoGame, SnakeLadder } from '../../../assets/images';
+import {TicTacToeGame, BingoGame, SnakeLadder} from '../../../assets/images';
 import {useSelector} from 'react-redux';
+import Modal from 'react-native-modal';
 const mockData = [
   {
     name: 'Tic Tac\n Toe',
@@ -38,6 +38,7 @@ const mockData = [
   },
 ];
 const MenuScreen = ({navigation}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   console.log(useSelector(state => state.UserDetailsReducer));
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
@@ -132,7 +133,23 @@ const MenuScreen = ({navigation}) => {
         </View>
         {/* </ScrollView> */}
       </View>
-      <ProfileScreen />
+      {/* <ProfileScreen /> */}
+      <TouchableOpacity onPress={() => setIsModalOpen(true)}>
+        <Text> User </Text>
+      </TouchableOpacity>
+      <Modal
+        isVisible={isModalOpen}
+        backdropColor="#B4B3DB"
+        backdropOpacity={0.8}
+        // animationIn="zoomInDown"
+        // animationOut="zoomOutUp"
+        // animationInTiming={600}
+        // animationOutTiming={600}
+        // backdropTransitionInTiming={600}
+        //</SafeAreaView>backdropTransitionOutTiming={600}
+      >
+        <ProfileScreen />
+      </Modal>
     </SafeAreaView>
   );
 };
