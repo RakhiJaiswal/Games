@@ -14,11 +14,11 @@ import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import {Colors} from '../../Games/TicTacToe/assets/consts';
-import { google, user } from '../../../assets/images';
+import {google, user} from '../../../assets/images';
 
 GoogleSignin.configure({
   webClientId:
-    '466698973105-64alfjckctooq0bh6ekveue92a0u0vj4.apps.googleusercontent.com',
+    '841195506338-ekc93vqpcq2rdeo5vgmue5et401v0qei.apps.googleusercontent.com',
 });
 
 const LoginScreen = () => {
@@ -57,6 +57,7 @@ const LoginScreen = () => {
         icon={google}
         buttonPress={() => {
           onGoogleButtonPress().then(res => {
+            console.log(res, 'resres');
             dispatch(
               LoginUserAction({
                 userType: 'non-guest',

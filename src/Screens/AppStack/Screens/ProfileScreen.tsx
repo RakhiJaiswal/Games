@@ -1,49 +1,84 @@
-import React from 'react';
-import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
-import {LogoutUserAction} from '../../../store/Actions/UserAction';
-import {useDispatch} from 'react-redux';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
+import {
+  EditNameAction,
+  LogoutUserAction,
+} from '../../../store/Actions/UserAction';
+import {useDispatch, useSelector} from 'react-redux';
+import {ResponsiveSize} from '../../../utils/ResponsiveSize';
+import {close} from '../../../assets/images';
+import {TextInput} from 'react-native-gesture-handler';
+import {profileIcon} from '../../../assets/images';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({setIsModalOpen}) => {
+  const display_name = useSelector(
+    state => state.UserDetailsReducer.userData.displayName,
+  );
+  const photoURL = useSelector(
+    state => state.UserDetailsReducer.userData.photoURL,
+  );
+  const profile_image = photoURL === undefined ? profileIcon : {uri: photoURL};
+
   const dispatch = useDispatch();
-
+  const [name, setName] = useState(
+    display_name === undefined ? 'GuestUser' : display_name,
+  );
+  console.log(display_name, 'namename');
   return (
-    <SafeAreaView style={{marginHorizontal: 50, marginTop: 20}}>
-      {/* <Text>ProfileScreen </Text>
+    <View
+      style={{
+        height: '50%',
+        width: '80%',
+        alignSelf: 'center',
+        backgroundColor: 'rgb(254,212,148)',
+        borderRadius: ResponsiveSize(50),
+        justifyContent: 'space-between',
+      }}>
+      <TouchableOpacity onPress={() => setIsModalOpen(false)}>
+        <Image
+          source={close}
+          style={{
+            height: ResponsiveSize(30),
+            width: ResponsiveSize(30),
+            alignSelf: 'flex-end',
+            marginRight: ResponsiveSize(30),
+            marginTop: ResponsiveSize(25),
+          }}
+        />
+      </TouchableOpacity>
       <Text> Name </Text>
-      <Text> Profile Image</Text> */}
+      <TextInput
+        value={name}
+        onChangeText={e => setName(e)}
+        style={{borderWidth: 1}}
+      />
+      <Image source={profile_image} style={{height: 50, width: 50}} />
+      <TouchableOpacity onPress={() => dispatch(EditNameAction(name))}>
+        <Text> Save </Text>
+      </TouchableOpacity>
       <TouchableOpacity
-        style={{
-          margin: 5,
-          height: 50,
-          alignItems: 'center',
-          shadowColor: 'yellow',
-          shadowOffset: {width: 0, height: 2},
-          shadowOpacity: 1,
-          shadowRadius: 1,
-          borderRadius: 40,
-          backgroundColor: 'yellow',
-          justifyContent: 'center',
-        }}
         onPress={() => {
-          dispatch(LogoutUserAction());
+          setIsModalOpen(false);
+          setTimeout(() => {
+            dispatch(LogoutUserAction());
+          }, 2000);
         }}>
         <Text
           style={{
-            marginHorizontal: 15,
-            fontSize: 25,
-            fontWeight: '900',
-            shadowColor: 'green',
-            shadowOffset: {width: 0, height: 2},
-            shadowOpacity: 1,
-            color: 'red',
-            shadowRadius: 1,
-            borderRadius: 40,
-            fontStyle: 'italic',
+            textAlign: 'center',
+            fontSize: ResponsiveSize(25),
           }}>
-          Logout{' '}
+          Logout
         </Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 

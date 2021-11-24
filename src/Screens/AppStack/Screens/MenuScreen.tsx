@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -12,9 +12,15 @@ import {
 } from 'react-native';
 import ProfileScreen from './ProfileScreen';
 import * as Animatable from 'react-native-animatable';
-import {TicTacToeGame, BingoGame, SnakeLadder} from '../../../assets/images';
+import {
+  TicTacToeGame,
+  BingoGame,
+  SnakeLadder,
+  profileIcon,
+} from '../../../assets/images';
 import {useSelector} from 'react-redux';
 import Modal from 'react-native-modal';
+import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 const mockData = [
   {
     name: 'Tic Tac\n Toe',
@@ -39,10 +45,35 @@ const mockData = [
 ];
 const MenuScreen = ({navigation}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const photoURL = useSelector(
+    state => state.UserDetailsReducer.userData.photoURL,
+  );
+  const profile_image = photoURL === undefined ? profileIcon : {uri: photoURL};
   console.log(useSelector(state => state.UserDetailsReducer));
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
       <View style={{backgroundColor: 'white', flex: 1}}>
+        <TouchableOpacity
+          onPress={() => setIsModalOpen(true)}
+          style={{
+            // borderRadius: ResponsiveSize(20),
+            width: ResponsiveSize(42),
+            height: ResponsiveSize(42),
+            alignSelf: 'flex-end',
+            // paddingTop: ResponsiveSize(2),
+            // paddingLeft: ResponsiveSize(6),
+            marginRight: ResponsiveSize(30),
+          }}>
+          <Image
+            source={profile_image}
+            style={{
+              borderWidth: 2,
+              height: ResponsiveSize(40),
+              width: ResponsiveSize(40),
+              borderRadius: ResponsiveSize(20),
+            }}
+          />
+        </TouchableOpacity>
         <View
           style={{
             alignItems: 'center',
@@ -134,12 +165,10 @@ const MenuScreen = ({navigation}) => {
         {/* </ScrollView> */}
       </View>
       {/* <ProfileScreen /> */}
-      <TouchableOpacity onPress={() => setIsModalOpen(true)}>
-        <Text> User </Text>
-      </TouchableOpacity>
+
       <Modal
         isVisible={isModalOpen}
-        backdropColor="#B4B3DB"
+        backdropColor="rgba(0,0,0, 0.8)"
         backdropOpacity={0.8}
         // animationIn="zoomInDown"
         // animationOut="zoomOutUp"
@@ -148,7 +177,7 @@ const MenuScreen = ({navigation}) => {
         // backdropTransitionInTiming={600}
         //</SafeAreaView>backdropTransitionOutTiming={600}
       >
-        <ProfileScreen />
+        <ProfileScreen setIsModalOpen={setIsModalOpen} />
       </Modal>
     </SafeAreaView>
   );
