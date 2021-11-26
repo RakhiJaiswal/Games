@@ -1,4 +1,9 @@
-import {EDIT_NAME, LOGIN_USER, LOGOUT_USER} from '../Actions/ActionTypes';
+import {
+  EDIT_NAME,
+  EDIT_PIC,
+  LOGIN_USER,
+  LOGOUT_USER,
+} from '../Actions/ActionTypes';
 
 const initialState = {
   userType: '',
@@ -6,8 +11,10 @@ const initialState = {
   userData: {},
 };
 
-export const UserDetailsReducer = (state = initialState, action) => {
-  console.log(action.payload, 'action ');
+export const UserDetailsReducer = (
+  state = initialState,
+  action: {payload: {userType: string; userData: {}}; type: string},
+) => {
   switch (action.type) {
     case LOGIN_USER:
       return {
@@ -22,6 +29,11 @@ export const UserDetailsReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: {...state.userData, displayName: action.payload},
+      };
+    case EDIT_PIC:
+      return {
+        ...state,
+        userData: {...state.userData, photoURL: action.payload},
       };
     default:
       return state;

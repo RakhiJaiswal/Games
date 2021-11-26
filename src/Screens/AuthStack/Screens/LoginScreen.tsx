@@ -21,6 +21,11 @@ GoogleSignin.configure({
     '841195506338-ekc93vqpcq2rdeo5vgmue5et401v0qei.apps.googleusercontent.com',
 });
 
+interface buttonViewProps {
+  buttonPress: () => void;
+  buttonText: string;
+  icon: any;
+}
 const LoginScreen = () => {
   const dispatch = useDispatch();
 
@@ -30,7 +35,8 @@ const LoginScreen = () => {
 
     return auth().signInWithCredential(googleCredential);
   }
-  const ButtonView = ({buttonPress, buttonText, icon}) => {
+
+  const ButtonView = ({buttonPress, buttonText, icon}: buttonViewProps) => {
     return (
       <TouchableOpacity style={styles.button} onPress={buttonPress}>
         <Image resizeMode="stretch" style={styles.icon} source={icon} />
@@ -56,8 +62,7 @@ const LoginScreen = () => {
         buttonText={'  Google'}
         icon={google}
         buttonPress={() => {
-          onGoogleButtonPress().then(res => {
-            console.log(res, 'resres');
+          onGoogleButtonPress().then((res: any) => {
             dispatch(
               LoginUserAction({
                 userType: 'non-guest',
@@ -101,7 +106,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
   },
   icon: {height: ResponsiveSize(25), width: ResponsiveSize(25)},
   buttonText: {fontWeight: 'bold', fontSize: ResponsiveSize(21)},

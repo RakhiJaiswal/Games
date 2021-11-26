@@ -6,7 +6,7 @@ import Menu from './Menu';
 
 const TicTacToe = () => {
   const [screen, setScreen] = useState('menu');
-  
+
   const changeScreen = () => {
     screen === 'menu' ? setScreen('game') : setScreen('menu');
   };

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StatusBar, Image, StyleSheet} from 'react-native';
-import {Colors} from '../TicTacToe/assets/consts';
+import {SafeAreaView, StatusBar} from 'react-native';
+
 import LocalMultiplayer from './LocalMultiplayer';
 import Menu from './Menu';
 
-const SnakesLadder = ({navigation}) => {
+const SnakesLadder = () => {
   const [screen, setScreen] = useState('menu');
   const changeScreen = () => {
     screen === 'menu' ? setScreen('game') : setScreen('menu');

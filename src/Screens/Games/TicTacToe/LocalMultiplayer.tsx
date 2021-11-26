@@ -15,9 +15,9 @@ import {Cross, Circle, Tic, Toe, Tac, Reload} from './assets/images/index';
 import {Colors} from './assets/consts';
 import Menu from '../commonComponents/Menu';
 
-let Xarray = [];
-let Oarray = [];
-let mockData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let Xarray: number[] = [];
+let Oarray: number[] = [];
+let mockData: number[] | string[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let disable = [false, false, false, false, false, false, false, false, false];
 const winPosition = [
   [0, 1, 2],
@@ -29,25 +29,23 @@ const winPosition = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-let winArray = [];
+let winArray: number[] = [];
 
 const LocalMultiplayer = ({changeScreen}) => {
   const [count, setCount] = useState(0);
   const [turn, setNextTurn] = useState('X');
-  const [cell1, setCell1] = useState('');
-  const [cell2, setCell2] = useState('');
-  const [cell3, setCell3] = useState('');
+  const [cell1, setCell1] = useState<number>();
+  const [cell2, setCell2] = useState<number>();
+  const [cell3, setCell3] = useState<number>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [winner, setWinner] = useState(false);
-  let hasWinner;
+  const [winner, setWinner] = useState('');
+  let hasWinner: string | boolean;
 
-  const checkWinner = () => {};
-  
-  useEffect(() => {  
+  useEffect(() => {
     if (count === 0) {
       setWinner(false);
     }
- 
+
     for (let i = 0; i < winPosition.length; i++) {
       if (turn === 'X') {
         hasWinner =
@@ -69,14 +67,14 @@ const LocalMultiplayer = ({changeScreen}) => {
       }
     }
   }, [turn]);
-  
+
   useEffect(() => {
     if (count === 9 && hasWinner !== true) {
       setWinner('Tie');
       disable.fill(true, 0, disable.length);
       setIsModalOpen(true);
     }
-  }, [count])
+  }, [count]);
 
   useEffect(() => {
     setCell1(winArray[0]);
@@ -92,14 +90,13 @@ const LocalMultiplayer = ({changeScreen}) => {
     winArray = [];
     setCount(0);
     setNextTurn('X');
-    setCell1('');
-    setCell2('');
-    setCell3('');
+    setCell1(-1);
+    setCell2(-1);
+    setCell3(-1);
     hasWinner = '';
   };
 
   const DefaultModalContent = () => {
-  
     return (
       <View style={styles.content}>
         <Text style={styles.contentTitle}>
@@ -233,9 +230,8 @@ const LocalMultiplayer = ({changeScreen}) => {
                     mockData[index] = turn;
                     disable[index] = true;
                     turn === 'X' ? Xarray.push(index) : Oarray.push(index);
-                    setCount(count+1)
+                    setCount(count + 1);
                     setNextTurn(turn === 'X' ? 'O' : 'X');
-                    
                   }}
                   activeOpacity={1}
                   style={{

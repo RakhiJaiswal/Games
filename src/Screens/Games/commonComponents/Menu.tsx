@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity , Image} from 'react-native';
-import { menu } from '../../../assets/images';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {menu} from '../../../assets/images';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 
 const Menu = ({onPress = () => {}}) => {

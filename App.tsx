@@ -8,9 +8,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthStack from './src/Screens/AuthStack';
 import AppStack from './src/Screens/AppStack';
 import {Provider} from 'react-redux';
-import {persistor, store} from './src/store';
+import {store} from './src/store';
 import {useSelector} from 'react-redux';
-import {PersistGate} from 'redux-persist/integration/react';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +23,6 @@ const AppNavigator = () => {
       <Stack.Navigator
         screenOptions={{
           gestureEnabled: true,
-          animation: 'slide_from_right',
           headerShown: false,
         }}>
         {userDetails ? (
@@ -40,9 +38,7 @@ const AppNavigator = () => {
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AppNavigator />
-      </PersistGate>
+      <AppNavigator />
     </Provider>
   );
 };

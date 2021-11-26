@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {
   Alert,
   FlatList,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -12,15 +11,24 @@ import {
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import BackButton from '../commonComponents/BackButton';
 
+interface renderBingoProps {
+  item: {value: number; selected: boolean};
+  index: number;
+}
+
 const Bingo = () => {
-  const bingoArray = [];
+  const bingoArray: Array<number> = [];
 
   do {
-    var r = Math.floor(Math.random() * 25) + 1;
-    if (bingoArray.indexOf(r) === -1) bingoArray.push(r);
-  } while (bingoArray.length < 25);
+    var r = Math.floor(Math.random() * 24) + 1;
+    if (bingoArray.indexOf(r) === -1) {
+      bingoArray.push(r);
+    }
+  } while (bingoArray.length < 24);
 
-  const data = [];
+  const data: [{value: number; selected: boolean}] = [
+    {value: 25, selected: false},
+  ];
 
   bingoArray.map(item => {
     data.push({
@@ -28,8 +36,9 @@ const Bingo = () => {
       selected: false,
     });
   });
-  const [bingoData, setBingoData] = useState(data);
-  const [UserArray, setUserArray] = useState([]);
+  const [bingoData, setBingoData] =
+    useState<[{value: number; selected: boolean}]>(data);
+  const [UserArray, setUserArray] = useState<Array<number>>([]);
   const [result, setResult] = useState([
     false,
     false,
@@ -59,6 +68,7 @@ const Bingo = () => {
     [4, 8, 12, 16, 20],
   ];
   const [Counter, setCounter] = useState(0);
+
   useEffect(() => {
     checkWinner();
   }, [bingoData]);
@@ -73,7 +83,7 @@ const Bingo = () => {
     }
   };
 
-  const renderBingo = ({item, index}) => {
+  const renderBingo = ({item, index}: renderBingoProps) => {
     return (
       <TouchableOpacity
         disabled={item.selected}

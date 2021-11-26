@@ -1,14 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  ImageBackground,
   FlatList,
   Image,
-  ScrollView,
 } from 'react-native';
 import ProfileScreen from './ProfileScreen';
 import * as Animatable from 'react-native-animatable';
@@ -49,25 +47,21 @@ const MenuScreen = ({navigation}) => {
     state => state.UserDetailsReducer.userData.photoURL,
   );
   const profile_image = photoURL === undefined ? profileIcon : {uri: photoURL};
-  console.log(useSelector(state => state.UserDetailsReducer));
+
   return (
     <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
       <View style={{backgroundColor: 'white', flex: 1}}>
         <TouchableOpacity
           onPress={() => setIsModalOpen(true)}
           style={{
-            // borderRadius: ResponsiveSize(20),
             width: ResponsiveSize(42),
             height: ResponsiveSize(42),
             alignSelf: 'flex-end',
-            // paddingTop: ResponsiveSize(2),
-            // paddingLeft: ResponsiveSize(6),
             marginRight: ResponsiveSize(30),
           }}>
           <Image
             source={profile_image}
             style={{
-              borderWidth: 2,
               height: ResponsiveSize(40),
               width: ResponsiveSize(40),
               borderRadius: ResponsiveSize(20),
@@ -164,7 +158,6 @@ const MenuScreen = ({navigation}) => {
         </View>
         {/* </ScrollView> */}
       </View>
-      {/* <ProfileScreen /> */}
 
       <Modal
         isVisible={isModalOpen}
