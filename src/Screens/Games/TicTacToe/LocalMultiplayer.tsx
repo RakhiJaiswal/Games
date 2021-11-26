@@ -62,7 +62,9 @@ const LocalMultiplayer = ({changeScreen}) => {
         winArray = winPosition[i];
         setWinner(turn === 'X' ? 'O' : 'X');
         disable.fill(true, 0, disable.length);
-        setIsModalOpen(true);
+        setTimeout(() => {
+          setIsModalOpen(true);
+        }, 1000);
         break;
       }
     }
@@ -72,7 +74,9 @@ const LocalMultiplayer = ({changeScreen}) => {
     if (count === 9 && hasWinner !== true) {
       setWinner('Tie');
       disable.fill(true, 0, disable.length);
-      setIsModalOpen(true);
+      setTimeout(() => {
+        setIsModalOpen(true);
+      }, 1000);
     }
   }, [count]);
 

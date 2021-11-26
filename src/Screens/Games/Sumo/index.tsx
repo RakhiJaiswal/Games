@@ -1,23 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, SafeAreaView, TouchableOpacity, Alert} from 'react-native';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
+import Menu from '../commonComponents/Menu';
 
-const Sumo = () => {
+const Sumo = ({navigation}) => {
   const [y, setY] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    if (y < -166 || y > 164) {
+    if (y < -169 || y > 170) {
       setDisabled(true);
     }
   }, [y]);
   useEffect(() => {
-    disabled && (y > 184 ? Alert.alert('Blue wins') : Alert.alert('red wins'));
+    disabled && (y > 170 ? Alert.alert('Blue wins') : Alert.alert('red wins'));
   }, [disabled]);
 
+  const onBtnPress = () => {
+    setDisabled(false);
+    setY(0);
+    navigation.goBack();
+  };
+  console.log(y, 'y');
   return (
     <SafeAreaView
-      style={{flex: 1, backgroundColor: 'white', alignItems: 'center'}}>
+      style={{flex: 1, backgroundColor: 'pink', alignItems: 'center'}}>
+      <View style={{alignSelf: 'flex-end'}}>
+        <Menu onPress={onBtnPress} />
+      </View>
+      <View style={{flex: 1}} />
       <TouchableOpacity
         disabled={disabled}
         onPress={() => {
@@ -49,7 +60,7 @@ const Sumo = () => {
           style={{
             height: ResponsiveSize(40),
             width: ResponsiveSize(40),
-            backgroundColor: 'blue',
+            backgroundColor: 'purple',
             transform: [{translateY: y}],
           }}></View>
       </View>
@@ -69,6 +80,7 @@ const Sumo = () => {
           }}
         />
       </TouchableOpacity>
+      <View style={{flex: 1}} />
     </SafeAreaView>
   );
 };

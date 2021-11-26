@@ -10,3 +10,4 @@ export {default as dice2} from './dice2.png';
 export {default as dice3} from './dice3.png';
 export {default as dice4} from './dice4.png';
 export {default as dice5} from './dice5.png';
+export {default as logo} from './logo.png';

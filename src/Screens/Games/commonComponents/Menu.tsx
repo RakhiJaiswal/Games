@@ -7,7 +7,12 @@ const Menu = ({onPress = () => {}}) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <View style={{position: 'absolute', right: 10}}>
+      <View
+        style={{
+          position: 'absolute',
+          right: 10,
+          zIndex: 9999,
+        }}>
         <TouchableOpacity onPress={() => setOpen(!open)}>
           <Image
             source={menu}
@@ -24,10 +29,11 @@ const Menu = ({onPress = () => {}}) => {
             top: ResponsiveSize(40),
             backgroundColor: 'white',
             padding: ResponsiveSize(10),
-            zIndex: 999,
+            zIndex: 9999999,
           }}>
           <TouchableOpacity
             onPress={() => {
+              console.log('orhsvdjh');
               onPress();
             }}>
             <Text> Leave Game </Text>

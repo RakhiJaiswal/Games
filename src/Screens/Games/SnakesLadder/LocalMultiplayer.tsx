@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   Image,
   Alert,
   Animated,
@@ -27,6 +26,7 @@ import {
   dice5,
   dice6,
 } from './assets/images';
+import Menu from '../commonComponents/Menu';
 
 const LocalMultiplayer = ({changeScreen}) => {
   let data = [];
@@ -49,6 +49,16 @@ const LocalMultiplayer = ({changeScreen}) => {
     {img: pinkSnake, style: styles.snakes4},
     {img: largeSnake, style: styles.snakes6},
   ];
+  const reset = () => {
+    setNumber(1);
+    setCurrentPosition1(1);
+    setCurrentPosition2(1);
+    setChance1(false);
+  };
+  const onBtnPress = () => {
+    reset();
+    changeScreen();
+  };
   const shakeValue = useRef(new Animated.Value(0));
 
   const interpolated = shakeValue.current.interpolate({
@@ -158,8 +168,64 @@ const LocalMultiplayer = ({changeScreen}) => {
     lines--;
   }
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'rgb(76,97,236)'}}>
-      <View style={{backgroundColor: 'rgb(76,97,236)'}}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: 'rgb(0,100,51)',
+      }}>
+      <View style={{flex: 2}}>
+        <Menu onPress={onBtnPress} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            paddingHorizontal: ResponsiveSize(10),
+            paddingVertical: ResponsiveSize(20),
+            borderRadius: ResponsiveSize(20),
+            borderWidth: 1,
+            borderColor: 'white',
+            backgroundColor: 'red',
+          }}>
+          <Text> Player 1 </Text>
+        </View>
+        <Animated.View
+          style={{
+            transform: [{translateX: interpolated}],
+          }}>
+          <Pressable
+            onPress={() => {
+              shakeFunction();
+              setNumber(Math.floor(1 + Math.random() * 6));
+              setTimeout(() => {
+                setChance1(!chance1);
+              }, 200);
+            }}>
+            <Image
+              resizeMode="stretch"
+              source={diceArray[number - 1]}
+              style={{width: ResponsiveSize(60), height: ResponsiveSize(60)}}
+            />
+          </Pressable>
+        </Animated.View>
+        <View
+          style={{
+            paddingHorizontal: ResponsiveSize(10),
+            paddingVertical: ResponsiveSize(20),
+            borderRadius: ResponsiveSize(20),
+            borderWidth: 1,
+            borderColor: 'white',
+          }}>
+          <Text style={{color: 'white'}}> Player 2 </Text>
+        </View>
+      </View>
+      <View style={{flex: 1}} />
+      <View style={{backgroundColor: 'rgb(0,100,51)'}}>
         <FlatList //below board
           bounces={false}
           data={data}
@@ -211,48 +277,7 @@ const LocalMultiplayer = ({changeScreen}) => {
           />
         </View>
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            height: ResponsiveSize(30),
-            // width: ResponsiveSize(30),
-            backgroundColor: 'red',
-          }}>
-          <Text> Player 1 </Text>
-        </View>
-        <Animated.View
-          style={{
-            transform: [{translateX: interpolated}],
-          }}>
-          <Pressable
-            onPress={() => {
-              shakeFunction();
-              setNumber(Math.floor(1 + Math.random() * 6));
-              setTimeout(() => {
-                setChance1(!chance1);
-              }, 200);
-            }}>
-            <Image
-              resizeMode="stretch"
-              source={diceArray[number - 1]}
-              style={{width: ResponsiveSize(60), height: ResponsiveSize(60)}}
-            />
-          </Pressable>
-        </Animated.View>
-        <View
-          style={{
-            paddingHorizontal: ResponsiveSize(10),
-            paddingVertical: ResponsiveSize(20),
-            backgroundColor: 'green',
-          }}>
-          <Text> Player 2 </Text>
-        </View>
-      </View>
+      <View style={{flex: 1}} />
     </SafeAreaView>
   );
 };
@@ -277,22 +302,22 @@ const styles = StyleSheet.create({
     width: ResponsiveSize(30),
     position: 'absolute',
     top: ResponsiveSize(30),
-    left: ResponsiveSize(95),
+    left: ResponsiveSize(104),
   },
   ladder2: {
     height: ResponsiveSize(140),
     width: ResponsiveSize(30),
     position: 'absolute',
     top: ResponsiveSize(100),
-    left: ResponsiveSize(378),
+    left: ResponsiveSize(415),
     transform: [{rotate: '20deg'}],
   },
   ladder3: {
     height: ResponsiveSize(150),
     width: ResponsiveSize(30),
     position: 'absolute',
-    top: ResponsiveSize(420),
-    left: ResponsiveSize(140),
+    top: ResponsiveSize(415),
+    left: ResponsiveSize(155),
     transform: [{rotate: '35deg'}],
   },
   ladder4: {
@@ -300,7 +325,7 @@ const styles = StyleSheet.create({
     width: ResponsiveSize(30),
     position: 'absolute',
     top: ResponsiveSize(290),
-    left: ResponsiveSize(332),
+    left: ResponsiveSize(372),
     transform: [{rotate: '-20deg'}],
   },
   ladder5: {
@@ -308,7 +333,7 @@ const styles = StyleSheet.create({
     width: ResponsiveSize(30),
     position: 'absolute',
     top: ResponsiveSize(540),
-    left: ResponsiveSize(310),
+    left: ResponsiveSize(345),
   },
   snakes1: {
     height: ResponsiveSize(105),
@@ -316,22 +341,22 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: ResponsiveSize(540),
     transform: [{rotate: '10deg'}],
-    left: ResponsiveSize(140),
+    left: ResponsiveSize(170),
   },
   snakes2: {
-    height: ResponsiveSize(215),
+    height: ResponsiveSize(230),
     width: ResponsiveSize(160),
     position: 'absolute',
-    top: ResponsiveSize(270),
-    left: ResponsiveSize(245),
-    transform: [{rotate: '30deg'}],
+    top: ResponsiveSize(257),
+    left: ResponsiveSize(280),
+    transform: [{rotate: '32deg'}],
   },
   snakes3: {
     height: ResponsiveSize(150),
     width: ResponsiveSize(100),
     position: 'absolute',
     top: ResponsiveSize(25),
-    left: ResponsiveSize(145),
+    left: ResponsiveSize(175),
     transform: [{rotate: '290deg'}],
   },
   snakes4: {
@@ -339,7 +364,7 @@ const styles = StyleSheet.create({
     width: ResponsiveSize(100),
     position: 'absolute',
     top: ResponsiveSize(225),
-    left: ResponsiveSize(145),
+    left: ResponsiveSize(165),
     transform: [{rotate: '30deg'}],
   },
   snakes5: {
@@ -347,7 +372,7 @@ const styles = StyleSheet.create({
     width: ResponsiveSize(150),
     position: 'absolute',
     top: ResponsiveSize(25),
-    left: ResponsiveSize(205),
+    left: ResponsiveSize(215),
   },
   snakes6: {
     height: ResponsiveSize(540),

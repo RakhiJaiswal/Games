@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   StatusBar,
   StyleSheet,
+  Image,
 } from 'react-native';
-import {Colors} from '../TicTacToe/assets/consts';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import BackButton from '../commonComponents/BackButton';
+import {logo} from './assets/images';
 
 const Menu = ({changeScreen}) => {
   return (
@@ -17,9 +18,13 @@ const Menu = ({changeScreen}) => {
       <StatusBar barStyle={'light-content'} />
       <View style={styles.container}>
         <BackButton />
-        <View style={{height: ResponsiveSize(40)}} />
-        <Text style={{color:"white"}}> snakes and LAdder </Text>
-        <View style={{flex: 1}} />
+        <View style={{flex: 0.5}} />
+        <Image
+          resizeMode={'stretch'}
+          source={logo}
+          style={{height: ResponsiveSize(500), width: '100%'}}
+        />
+        <View style={{flex: 0.5}} />
         <TouchableOpacity style={styles.buttonView} onPress={changeScreen}>
           <Text style={styles.buttonText}> Local Mutliplayer </Text>
         </TouchableOpacity>
@@ -33,7 +38,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: ResponsiveSize(30),
     fontWeight: 'bold',
-    color: 'magenta',
+    color: 'green',
   },
   buttonView: {
     backgroundColor: 'white',
@@ -42,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: ResponsiveSize(20),
   },
   img: {width: '70%', height: '18%'},
-  mainContainer: {backgroundColor: Colors.purple, flex: 1},
-  container: {flex: 1, backgroundColor: Colors.purple, alignItems: 'center'},
+  mainContainer: {backgroundColor: 'rgb(0,100,51)', flex: 1},
+  container: {flex: 1, backgroundColor: 'rgb(0,100,51)', alignItems: 'center'},
 });
 export default Menu;
