@@ -87,6 +87,7 @@ const MenuScreen = ({navigation}) => {
                 shadowOpacity: 1,
                 color: 'red',
                 fontStyle: 'italic',
+                elevation: 999,
               }}>
               2 PLAYER GAMES
             </Text>

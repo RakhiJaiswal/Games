@@ -19,7 +19,7 @@ import {close} from '../../../assets/images';
 import {TextInput} from 'react-native-gesture-handler';
 import {profileIcon} from '../../../assets/images';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {ImagePicker} from '../Components/ImagePicker';
+import ImagePicker from '../Components/ImagePicker';
 
 const ProfileScreen = ({setIsModalOpen}) => {
   const dispatch = useDispatch();
@@ -46,12 +46,6 @@ const ProfileScreen = ({setIsModalOpen}) => {
   };
 
   const {top} = useSafeAreaInsets();
-
-  const cameraOnPress = () => {
-    ImagePicker().then(response => {
-      setPic({uri: response});
-    });
-  };
 
   return (
     <KeyboardAvoidingView
@@ -80,24 +74,18 @@ const ProfileScreen = ({setIsModalOpen}) => {
                 style={styles.textInput}
               />
             </View>
-            <View style={{flex: 1}} />
+            {/* <View style={{flex: 1}} /> */}
             <View style={styles.rowView}>
               <Text> Profile {'\n'} Picture </Text>
               <Image source={pic} style={styles.profilePic} />
-              <TouchableOpacity
-                onPress={() => {
-                  cameraOnPress();
-                }}
-                style={styles.uploadBtn}>
-                <Text style={styles.uploadText}> Upload </Text>
-              </TouchableOpacity>
+              <ImagePicker setPic={setPic} />
             </View>
-            <View style={{flex: 1}} />
+            {/* <View style={{flex: 1}} /> */}
             <TouchableOpacity onPress={saveChanges_func} style={styles.saveBtn}>
               <Text style={styles.saveText}> Save Changes </Text>
             </TouchableOpacity>
           </View>
-          <View style={{flex: 1}} />
+          <View style={{flex: 0.1}} />
           <TouchableOpacity style={styles.logoutBtn} onPress={logout_func}>
             <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity>
@@ -159,8 +147,6 @@ const styles = StyleSheet.create({
     paddingVertical: ResponsiveSize(2),
   },
   saveText: {fontSize: ResponsiveSize(15), textAlign: 'center'},
-  uploadBtn: {},
-  uploadText: {textDecorationLine: 'underline'},
   keyboardAvoidingView: {
     flex: 1,
   },

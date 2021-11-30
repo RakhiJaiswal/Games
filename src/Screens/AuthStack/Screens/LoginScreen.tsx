@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   SafeAreaView,
@@ -18,7 +18,9 @@ import {google, user} from '../../../assets/images';
 
 GoogleSignin.configure({
   webClientId:
-    '841195506338-ekc93vqpcq2rdeo5vgmue5et401v0qei.apps.googleusercontent.com',
+    '466698973105-64alfjckctooq0bh6ekveue92a0u0vj4.apps.googleusercontent.com',
+  // iosClientId:
+  //   '466698973105-65ickde5dli47ltbcbjtcqeerlo50q4q.apps.googleusercontent.com',
 });
 
 interface buttonViewProps {
@@ -28,14 +30,25 @@ interface buttonViewProps {
 }
 const LoginScreen = () => {
   const dispatch = useDispatch();
-
-  async function onGoogleButtonPress() {
-    const {idToken} = await GoogleSignin.signIn();
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-    return auth().signInWithCredential(googleCredential);
+  const [initializing, setInitializing] = useState(true);
+  const [users, setUser] = useState();
+  function onAuthStateChanged(user1) {
+    setUser(user1);
+    if (initializing) setInitializing(false);
   }
 
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  async function onGoogleButtonPress() {
+    console.log('buttonclicked');
+    const {idToken} = await GoogleSignin.signIn();
+    console.log(idToken, 'idTokenidToken');
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    return auth().signInWithCredential(googleCredential);
+  }
   const ButtonView = ({buttonPress, buttonText, icon}: buttonViewProps) => {
     return (
       <TouchableOpacity style={styles.button} onPress={buttonPress}>
