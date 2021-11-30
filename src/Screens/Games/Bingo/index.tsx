@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import BackButton from '../commonComponents/BackButton';
+import {socket} from '../../../../App';
 
 interface renderBingoProps {
   item: {value: number; selected: boolean};
@@ -70,8 +71,22 @@ const Bingo = () => {
   const [Counter, setCounter] = useState(0);
 
   useEffect(() => {
+    console.log('fdlsfjdslk');
     checkWinner();
-  }, [bingoData]);
+  }, [JSON.stringify(bingoData)]);
+
+  // useEffect(() => {
+  //   console.log(bingoData, 'bingoData ');
+  const temp = [...bingoData];
+  socket.on('counter', data => {
+    temp.forEach(item => {
+      if (item.value === data.value) {
+        item.selected = true;
+      }
+    });
+    setBingoData(temp);
+  });
+  // });
 
   const checkWinner = () => {
     for (var i = 0; i < 12; i++) {
@@ -88,6 +103,9 @@ const Bingo = () => {
       <TouchableOpacity
         disabled={item.selected}
         onPress={() => {
+          console.log('emit');
+          socket.emit('counter', {value: item.value});
+
           setUserArray([...UserArray, index]);
           const temp = bingoData;
           temp[index].selected = true;
@@ -111,6 +129,7 @@ const Bingo = () => {
   };
   let count;
   useEffect(() => {
+    console.log(result, 'resultresult');
     setCounter(0);
     count = 0;
     count = result.filter(Boolean).length;

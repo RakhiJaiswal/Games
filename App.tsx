@@ -10,10 +10,14 @@ import AppStack from './src/Screens/AppStack';
 import {Provider} from 'react-redux';
 import {store} from './src/store';
 import {useSelector} from 'react-redux';
+import io from 'socket.io-client/dist/socket.io';
 
 const Stack = createNativeStackNavigator();
 
 export const navigationRef = createNavigationContainerRef();
+
+const API_LINK = 'https://4c42-223-177-181-110.ngrok.io';
+export const socket = io(API_LINK, {jsonp: false});
 
 const AppNavigator = () => {
   const userDetails = useSelector(state => state.UserDetailsReducer.loggedIn);

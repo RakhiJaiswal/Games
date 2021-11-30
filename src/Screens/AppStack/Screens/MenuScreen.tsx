@@ -19,6 +19,7 @@ import {
 import {useSelector} from 'react-redux';
 import Modal from 'react-native-modal';
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
+
 const mockData = [
   {
     name: 'Tic Tac\n Toe',
