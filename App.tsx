@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   NavigationContainer,
   createNavigationContainerRef,
@@ -15,12 +15,15 @@ import io from 'socket.io-client/dist/socket.io';
 const Stack = createNativeStackNavigator();
 
 export const navigationRef = createNavigationContainerRef();
-
-const API_LINK = 'https://4c42-223-177-181-110.ngrok.io';
-export const socket = io(API_LINK, {jsonp: false});
+let socket;
 
 const AppNavigator = () => {
   const userDetails = useSelector(state => state.UserDetailsReducer.loggedIn);
+
+  useEffect(() => {
+    const API_LINK = 'https://a524-223-177-181-110.ngrok.io';
+    socket = io(API_LINK, {jsonp: false});
+  }, []);
 
   return (
     <NavigationContainer ref={navigationRef}>
@@ -48,3 +51,4 @@ const App = () => {
 };
 
 export default App;
+export {socket};

@@ -75,18 +75,35 @@ const Bingo = () => {
     checkWinner();
   }, [JSON.stringify(bingoData)]);
 
-  // useEffect(() => {
-  //   console.log(bingoData, 'bingoData ');
-  const temp = [...bingoData];
-  socket.on('counter', data => {
+  const onSocketResponse = data => {
+    const temp = [...bingoData];
+    console.log('socket once ');
     temp.forEach(item => {
       if (item.value === data.value) {
         item.selected = true;
       }
     });
     setBingoData(temp);
-  });
-  // });
+  };
+
+  const onWinnerSocketResponse = data => {
+    Alert.alert('winner is', JSON.stringify(data.winner));
+  };
+  useEffect(() => {
+    socket.on('counter', onSocketResponse);
+    return () => {
+      console.log('cleanup');
+      socket.off('counter', onSocketResponse);
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on('winner', onWinnerSocketResponse);
+    return () => {
+      console.log('cleanup');
+      socket.off('winner', onWinnerSocketResponse);
+    };
+  }, []);
 
   const checkWinner = () => {
     for (var i = 0; i < 12; i++) {
@@ -127,6 +144,7 @@ const Bingo = () => {
       </TouchableOpacity>
     );
   };
+
   let count;
   useEffect(() => {
     console.log(result, 'resultresult');
@@ -134,11 +152,12 @@ const Bingo = () => {
     count = 0;
     count = result.filter(Boolean).length;
     if (count >= 5) {
-      Alert.alert('you Won');
+      socket.emit('winner');
     }
     setCounter(count);
   }, [result]);
 
+  console.log('mian');
   return (
     <SafeAreaView style={{backgroundColor: 'rgb(0,202,192)', flex: 1}}>
       <StatusBar barStyle={'light-content'} />
@@ -206,4 +225,4 @@ const Bingo = () => {
   );
 };
 
-export default Bingo;
+export default React.memo(Bingo);
