@@ -13,15 +13,24 @@ const CreateCode = ({changeScreen}) => {
       setJoinCode(Math.floor(100000 + Math.random() * 900000));
     }
   }, []);
+
   useEffect(() => {
     console.log('joinCode', joinCode);
     socket.emit('createGame', {gameName: 'Bingo', joinCode: joinCode});
   }, [joinCode]);
+
   const createGameResponse = data => {
     console.log('data room ', data);
     setRoom(data);
   };
-
+  socket.on('checkCode', data => setRoom(data));
+  useEffect(() => {
+    return () => {
+      socket.off('checkCode', data => {
+        setRoom(data);
+      });
+    };
+  }, []);
   useEffect(() => {
     socket.on('createGame', createGameResponse);
     return () => {
