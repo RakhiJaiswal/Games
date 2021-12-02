@@ -94,7 +94,7 @@ const MenuScreen = ({navigation}) => {
             </Text>
           </Animatable.View>
         </View>
-        {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+
         <View
           style={{
             justifyContent: 'center',
@@ -158,7 +158,6 @@ const MenuScreen = ({navigation}) => {
             }}
           />
         </View>
-        {/* </ScrollView> */}
       </View>
 
       <Modal
