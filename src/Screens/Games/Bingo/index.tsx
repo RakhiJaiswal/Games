@@ -14,11 +14,6 @@ const Bingo = () => {
     data.gameState.status === 'Playing' && setScreen('Game');
   };
 
-  const endGameResponse = data => {
-    data.gameState.status === 'GameOver' && setScreen('End');
-    setWinner(data.winner);
-  };
-
   useEffect(() => {
     socket.on('startGame', startGameResponse);
     return () => {
@@ -26,10 +21,15 @@ const Bingo = () => {
     };
   }, []);
 
+  const onWinnerSocketResponse = data => {
+    data.gameState.status === 'GameOver' && setScreen('End');
+    setWinner(data.winner);
+  };
+
   useEffect(() => {
-    socket.on('endGame', endGameResponse);
+    socket.on('winner', onWinnerSocketResponse);
     return () => {
-      socket.off('endGame', endGameResponse);
+      socket.off('winner', onWinnerSocketResponse);
     };
   }, []);
 

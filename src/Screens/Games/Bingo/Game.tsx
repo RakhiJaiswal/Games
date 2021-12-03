@@ -11,6 +11,7 @@ import {
 import {ResponsiveSize} from '../../../utils/ResponsiveSize';
 import BackButton from '../commonComponents/BackButton';
 import {socket} from '../../../../App';
+import {useSelector} from 'react-redux';
 
 interface renderBingoProps {
   item: {value: number; selected: boolean};
@@ -18,6 +19,9 @@ interface renderBingoProps {
 }
 
 const Game = ({changeScreen}) => {
+  const userName = useSelector(
+    state => state.UserDetailsReducer.userData.displayName,
+  );
   const bingoArray: Array<number> = [];
 
   do {
@@ -87,10 +91,10 @@ const Game = ({changeScreen}) => {
     setBingoData(temp);
   };
 
-  const onWinnerSocketResponse = data => {
-    // Alert.alert('winner is', JSON.stringify(data.winner));
-    socket.emit('endGame', data.winner);
-  };
+  // const onWinnerSocketResponse = data => {
+  //   // Alert.alert('winner is', JSON.stringify(data.winner));
+  //   // socket.emit('endGame', data.winner);
+  // };
   useEffect(() => {
     socket.on('counter', onSocketResponse);
     return () => {
@@ -99,13 +103,13 @@ const Game = ({changeScreen}) => {
     };
   }, []);
 
-  useEffect(() => {
-    socket.on('winner', onWinnerSocketResponse);
-    return () => {
-      // console.log('cleanup');
-      socket.off('winner', onWinnerSocketResponse);
-    };
-  }, []);
+  // useEffect(() => {
+  //   socket.on('winner', onWinnerSocketResponse);
+  //   return () => {
+  //     // console.log('cleanup');
+  //     socket.off('winner', onWinnerSocketResponse);
+  //   };
+  // }, []);
 
   const checkWinner = () => {
     for (var i = 0; i < 12; i++) {
@@ -159,7 +163,7 @@ const Game = ({changeScreen}) => {
     count = 0;
     count = result.filter(Boolean).length;
     if (count >= 5) {
-      socket.emit('winner');
+      socket.emit('winner', {name: userName});
     }
     setCounter(count);
   }, [result]);
