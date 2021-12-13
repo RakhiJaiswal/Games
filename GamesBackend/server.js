@@ -44,18 +44,22 @@ let playerArray = [];
 // let bingoPlayersArray = [];
 // let currentPlayerId;
 let roomObj;
+let turn = '';
 
 const playerTurn = () => {
   console.log(roomObj.users, 'pla');
-  let turn = '';
   if (turn === '') {
+    turn = roomObj.users[0];
     return roomObj.users[0];
   } else {
     let index = roomObj.users.findIndex(item => item.id === turn.id);
+    console.log('index', index);
     if (index === roomObj.users.length - 1) {
+      turn = roomObj.users[0];
       return roomObj.users[0];
     } else {
-      return roomObj.users[index + 1];
+      turn = roomObj.users[1];
+      return roomObj.users[1];
     }
   }
 };

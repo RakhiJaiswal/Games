@@ -18,10 +18,11 @@ interface renderBingoProps {
   index: number;
 }
 
-const Game = ({changeScreen, turn, room}) => {
-  // const [playerTurn , setPlayerTurn ] = useState( turn);
-  console.log('your turn ', turn, room);
-  const yourTurn = turn.id === room.currentPlayerID ? true : false;
+const Game = ({changeScreen, room}) => {
+  const [playerTurn, setPlayerTurn] = useState(room.turn.id);
+  console.log('your turn ', room.turn, room, currentplayerid);
+  const currentplayerid = socket.id;
+  const yourTurn = playerTurn === currentplayerid ? true : false;
 
   const userName = useSelector(
     state => state.UserDetailsReducer.userData.displayName,
