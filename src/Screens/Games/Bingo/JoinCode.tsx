@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, TextInput, Alert} from 'react-native';
+import {useSelector} from 'react-redux';
 import {socket} from '../../../../App';
 import BackButton from '../commonComponents/BackButton';
 import Lobby from './Lobby';
@@ -8,7 +9,9 @@ const JoinCode = () => {
   const [showLobby, setShowLobby] = useState(false);
   const [code, setCode] = useState();
   const [usersArray, setUsersArray] = useState([]);
-
+  const userName = useSelector(
+    state => state.UserDetailsReducer.userData.displayName,
+  );
   const checkCodeSocketResponse = data => {
     console.log(data, 'data ');
     data.roomExist === true
@@ -34,7 +37,7 @@ const JoinCode = () => {
       />
       <TouchableOpacity
         onPress={() => {
-          socket.emit('checkCode', {code: code});
+          socket.emit('checkCode', {code: code, name: userName});
         }}>
         <Text> Join </Text>
       </TouchableOpacity>

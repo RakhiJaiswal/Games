@@ -18,7 +18,11 @@ interface renderBingoProps {
   index: number;
 }
 
-const Game = ({changeScreen}) => {
+const Game = ({changeScreen, turn, room}) => {
+  // const [playerTurn , setPlayerTurn ] = useState( turn);
+  console.log('your turn ', turn, room);
+  const yourTurn = turn.id === room.currentPlayerID ? true : false;
+
   const userName = useSelector(
     state => state.UserDetailsReducer.userData.displayName,
   );
@@ -81,6 +85,7 @@ const Game = ({changeScreen}) => {
   }, [JSON.stringify(bingoData)]);
 
   const onSocketResponse = data => {
+    console.log(data, 'listen counter response ');
     const temp = [...bingoData];
     // console.log('socket once ');
     temp.forEach(item => {
@@ -113,13 +118,13 @@ const Game = ({changeScreen}) => {
 
   const checkWinner = () => {
     for (var i = 0; i < 12; i++) {
-      console.log(winningCombos[i], 'winningCombos');
-      console.log(bingoData, 'bingoData');
+      // console.log(winningCombos[i], 'winningCombos');
+      // console.log(bingoData, 'bingoData');
       const res = winningCombos[i].every(elem => bingoData[elem].selected);
       const res2 = result;
-      console.log(res, 'res', res2, 'res2');
+      // console.log(res, 'res', res2, 'res2');
       if (res && !res2[i]) {
-        console.log('here');
+        // console.log('here');
         res2[i] = res;
         setResult([...res2]);
       }
@@ -181,6 +186,7 @@ const Game = ({changeScreen}) => {
         }}>
         <BackButton />
         <View style={{flex: 1}} />
+        {yourTurn && <Text> your turn </Text>}
         <Text>
           <Text
             style={{

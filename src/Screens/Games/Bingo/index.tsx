@@ -10,7 +10,12 @@ import {socket} from '../../../../App';
 const Bingo = () => {
   const [screen, setScreen] = useState('CreateOrJoin');
   const [winner, setWinner] = useState();
+  const [turn, setTurn] = useState();
+  const [room, setRoom] = useState();
   const startGameResponse = data => {
+    console.log('data start game ', data);
+    setTurn(data.turn);
+    setRoom(data);
     data.gameState.status === 'Playing' && setScreen('Game');
   };
 
@@ -22,7 +27,8 @@ const Bingo = () => {
   }, []);
 
   const onWinnerSocketResponse = data => {
-    data.gameState.status === 'GameOver' && setScreen('End');
+    console.log('inside  winne socket', data);
+    data.gameState.status === 'EndGame' && setScreen('End');
     setWinner(data.winner);
   };
 
@@ -46,7 +52,7 @@ const Bingo = () => {
       case 'JoinCode':
         return <JoinCode />;
       case 'Game':
-        return <Game changeScreen={changeScreen} />;
+        return <Game changeScreen={changeScreen} turn={turn} room={room} />;
       case 'End':
         return <End winner={winner} />;
     }

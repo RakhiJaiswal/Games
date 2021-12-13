@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, Linking} from 'react-native';
+import {useSelector} from 'react-redux';
 import {socket} from '../../../../App';
 import BackButton from '../commonComponents/BackButton';
 import Lobby from './Lobby';
@@ -7,7 +8,9 @@ import Lobby from './Lobby';
 const CreateCode = ({changeScreen}) => {
   const [joinCode, setJoinCode] = useState(null);
   const [room, setRoom] = useState();
-
+  const userName = useSelector(
+    state => state.UserDetailsReducer.userData.displayName,
+  );
   useEffect(() => {
     if (joinCode === null) {
       setJoinCode(Math.floor(100000 + Math.random() * 900000));
@@ -15,12 +18,16 @@ const CreateCode = ({changeScreen}) => {
   }, []);
 
   useEffect(() => {
-    console.log('joinCode', joinCode);
-    socket.emit('createGame', {gameName: 'Bingo', joinCode: joinCode});
+    console.log('username000', userName);
+    socket.emit('createGame', {
+      gameName: 'Bingo',
+      joinCode: joinCode,
+      name: userName,
+    });
   }, [joinCode]);
 
   const createGameResponse = data => {
-    console.log('data room ', data);
+    console.log('data room  listen', data);
     setRoom(data);
   };
   socket.on('checkCode', data => setRoom(data));

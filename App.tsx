@@ -21,7 +21,7 @@ const AppNavigator = () => {
   const userDetails = useSelector(state => state.UserDetailsReducer.loggedIn);
 
   useEffect(() => {
-    const API_LINK = 'https://a9e1-223-177-181-110.ngrok.io';
+    const API_LINK = 'https://95a7-182-77-63-188.ngrok.io';
     socket = io(API_LINK, {jsonp: false});
   }, []);
 
