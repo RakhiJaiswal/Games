@@ -18,7 +18,7 @@ interface renderBingoProps {
   index: number;
 }
 
-const Game = ({changeScreen, room}) => {
+const Game = ({changeScreen, room, setRoom}) => {
   const [playerTurn, setPlayerTurn] = useState(room.turn.id);
   console.log('your turn ', room.turn, room, currentplayerid);
   const currentplayerid = socket.id;
@@ -95,6 +95,7 @@ const Game = ({changeScreen, room}) => {
       }
     });
     setBingoData(temp);
+    setRoom(data);
   };
 
   // const onWinnerSocketResponse = data => {

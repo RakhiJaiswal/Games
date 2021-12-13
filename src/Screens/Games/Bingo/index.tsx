@@ -52,7 +52,9 @@ const Bingo = () => {
       case 'JoinCode':
         return <JoinCode />;
       case 'Game':
-        return <Game changeScreen={changeScreen} room={room} />;
+        return (
+          <Game changeScreen={changeScreen} room={room} setRoom={setRoom} />
+        );
       case 'End':
         return <End winner={winner} />;
     }
