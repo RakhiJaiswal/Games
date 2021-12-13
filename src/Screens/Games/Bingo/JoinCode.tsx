@@ -13,7 +13,7 @@ const JoinCode = () => {
     state => state.UserDetailsReducer.userData.displayName,
   );
   const checkCodeSocketResponse = data => {
-    console.log(data, 'data ');
+    // console.log(data, 'data ');
     data.roomExist === true
       ? (setShowLobby(true), setUsersArray(data.users))
       : Alert.alert("check join code , room doesn't exist ");

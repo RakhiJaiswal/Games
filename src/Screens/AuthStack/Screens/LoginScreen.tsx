@@ -43,9 +43,9 @@ const LoginScreen = () => {
   }, []);
 
   async function onGoogleButtonPress() {
-    console.log('buttonclicked');
+    // console.log('buttonclicked');
     const {idToken} = await GoogleSignin.signIn();
-    console.log(idToken, 'idTokenidToken');
+    // console.log(idToken, 'idTokenidToken');
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     return auth().signInWithCredential(googleCredential);
   }

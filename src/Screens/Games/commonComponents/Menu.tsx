@@ -33,7 +33,7 @@ const Menu = ({onPress = () => {}}) => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              console.log('orhsvdjh');
+              // console.log('orhsvdjh');
               onPress();
             }}>
             <Text> Leave Game </Text>

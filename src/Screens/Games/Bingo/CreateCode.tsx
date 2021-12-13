@@ -18,7 +18,7 @@ const CreateCode = ({changeScreen}) => {
   }, []);
 
   useEffect(() => {
-    console.log('username000', userName);
+    // console.log('username000', userName);
     socket.emit('createGame', {
       gameName: 'Bingo',
       joinCode: joinCode,
@@ -27,7 +27,7 @@ const CreateCode = ({changeScreen}) => {
   }, [joinCode]);
 
   const createGameResponse = data => {
-    console.log('data room  listen', data);
+    // console.log('data room  listen', data);
     setRoom(data);
   };
   socket.on('checkCode', data => setRoom(data));

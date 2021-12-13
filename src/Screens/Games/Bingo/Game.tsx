@@ -19,9 +19,9 @@ interface renderBingoProps {
 }
 
 const Game = ({changeScreen, room, setRoom}) => {
-  const [playerTurn, setPlayerTurn] = useState(room.turn.id);
-  console.log('your turn ', room.turn, room, currentplayerid);
-  const currentplayerid = socket.id;
+  const [playerTurn, setPlayerTurn] = useState(room?.turn?.id);
+  console.log('roomObj', room);
+  const currentplayerid = socket?.id;
   const yourTurn = playerTurn === currentplayerid ? true : false;
 
   const userName = useSelector(

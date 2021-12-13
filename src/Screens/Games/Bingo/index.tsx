@@ -27,7 +27,7 @@ const Bingo = () => {
   }, []);
 
   const onWinnerSocketResponse = data => {
-    console.log('inside  winne socket', data);
+    // console.log('inside  winne socket', data);
     data.gameState.status === 'EndGame' && setScreen('End');
     setWinner(data.winner);
   };

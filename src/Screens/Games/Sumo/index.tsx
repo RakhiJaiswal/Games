@@ -21,7 +21,7 @@ const Sumo = ({navigation}) => {
     setY(0);
     navigation.goBack();
   };
-  console.log(y, 'y');
+  // console.log(y, 'y');
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: 'pink', alignItems: 'center'}}>
