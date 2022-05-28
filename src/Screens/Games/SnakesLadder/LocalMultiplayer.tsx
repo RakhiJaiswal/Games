@@ -401,3 +401,7 @@ const styles = StyleSheet.create({
     borderRadius: ResponsiveSize(10),
   },
 });
+
+// if dies=6 then player should roll  again 
+// player 2 is on no 2 at start instead of 1 
+// solve this issue asap 
